@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:match*",
-      "destination": "${API_ROUTE}:match*"
+      "destination": "https://820f-78-172-217-60.ngrok-free.app/:match*"
     },
     {
       "source": "/(.*)",
