@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "${process.env.API_ROUTE}"
+      "source": "/api/:match*",
+      "destination": "https://820f-78-172-217-60.ngrok-free.app/:match*"
     }
   ]
 }
