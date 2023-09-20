@@ -8,15 +8,15 @@ dotenv.config({ path: '.env.local' });
 const apiTarget = process.env.API_ROUTE || 'http://localhost:8000/';
 
 export default defineConfig({
-  // server: {
-  //   proxy: {
-  //     '/api': {
-  //       target: apiTarget,
-  //       changeOrigin: true,
-  //       rewrite: path => path.replace(/^\/api/, ''),
-  //     },
-  //   },
-  // },
+  server: {
+    proxy: {
+      '/api': {
+        target: apiTarget,
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, ''),
+      },
+    },
+  },
   resolve: {
     alias: {
       '~': path.resolve(__dirname, 'src'),

@@ -1,9 +1,10 @@
 import { RouteObject } from 'react-router-dom';
 import { MainLayout } from '~/pages/(main)/layout.tsx';
 import { MainPage } from '~/pages/(main)';
-import { About } from '~/pages/(main)/about';
+import { ReduxPage } from '~/pages/(main)/demo-redux';
+import { AuthPage } from '~/pages/(main)/demo-auth';
 import { ErrorBoundary } from '~/pages/error.tsx';
-import { ProductsPage } from '~/providers/react-router/(main)/products-pages.tsx';
+import { ProductsPage } from '~/providers/router-provider/(main)/products-pages.tsx';
 
 const MainPages: RouteObject = {
   path: '/',
@@ -15,8 +16,12 @@ const MainPages: RouteObject = {
       element: <MainPage />,
     },
     {
-      path: '/about',
-      element: <About />,
+      path: '/redux',
+      element: <ReduxPage />,
+    },
+    {
+      path: '/auth',
+      element: <AuthPage />,
     },
     { ...ProductsPage },
   ],

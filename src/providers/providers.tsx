@@ -1,12 +1,18 @@
-import { ReactRouter } from './react-router/react-router.tsx';
-import { ReduxProvider } from '~/providers/react-redux/redux-provider.tsx';
+import { ReactRouter } from '~/providers/router-provider/react-router.tsx';
+import { ReduxProvider } from '~/providers/redux-provider/redux-provider.tsx';
+import { AuthProvider } from '~/providers/auth-provider/auth-provider.tsx';
+import { CookiesProvider } from 'react-cookie';
 
 export const Providers = () => {
   return (
     <>
-      <ReduxProvider>
-        <ReactRouter />
-      </ReduxProvider>
+      <CookiesProvider>
+        <AuthProvider>
+          <ReduxProvider>
+            <ReactRouter />
+          </ReduxProvider>
+        </AuthProvider>
+      </CookiesProvider>
     </>
   );
 };
