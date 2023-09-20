@@ -5,7 +5,7 @@ import * as path from 'path';
 import * as dotenv from 'dotenv';
 dotenv.config({ path: '.env.local' });
 
-const apiTarget = process.env.API_ROUTE || 'http://localhost:8000/';
+const apiTarget = process.env.API_ROUTE || 'https://820f-78-172-217-60.ngrok-free.app/';
 
 export default defineConfig({
   server: {

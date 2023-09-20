@@ -8,6 +8,10 @@ const router = createBrowserRouter([
     path: '*',
     element: <NotFound />,
   },
+  {
+    path: '/api:*',
+    element: 'api routes',
+  },
   { ...MainPages },
   { ...AdminPages },
 ]);
