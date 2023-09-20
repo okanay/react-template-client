@@ -1,5 +1,6 @@
 import { TAuthUser, TLoginInformation } from '~/providers/auth-provider/auth-types.ts';
 import { Cookies } from 'react-cookie';
+import axios from 'axios';
 
 export const Login = async (email: string, password: string) => {
   const cookie = new Cookies();
@@ -10,18 +11,13 @@ export const Login = async (email: string, password: string) => {
   };
 
   if (email && password) {
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
+    const response = await axios.post(
+      '/api/login',
+      { email, password },
+      { headers: { 'Content-Type': 'application/json' } },
+    );
 
-    const data: TAuthUser | null = await response.json();
+    const data: TAuthUser | null = await response.data;
     if (data?.token) {
       loginInformation.info = 'success';
       cookie.set('authenticated_token', data.token);
