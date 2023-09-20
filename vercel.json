@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:match*",
-      "destination": "${process.env.API_ROUTE}:match*"
+      "destination": "${API_ROUTE}:match*"
     },
     {
       "source": "/(.*)",
