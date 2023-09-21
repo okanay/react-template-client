@@ -1,4 +1,4 @@
-import { TAuthUser, TLoginInformation } from '~/providers/auth-provider/auth-types.ts';
+import { TLoginInformation, TLoginResponse } from '~/providers/auth-provider/auth-types.ts';
 import { Cookies } from 'react-cookie';
 import axios from 'axios';
 
@@ -19,8 +19,9 @@ export const Login = async (email: string, password: string) => {
       );
 
       if (response.status === 200) {
-        const data: TAuthUser | null = await response.data;
+        const data: TLoginResponse | null = await response.data;
 
+        console.log(data);
         if (data?.token) {
           loginInformation.info = 'success';
           cookie.set('authenticated_token', data.token);

@@ -1,35 +1,48 @@
 import { ReactNode } from 'react';
 
-export type TAuthUser = {
-  token: string;
-  data?: {
-    accessToken: string;
-    refreshToken: string;
-    accessTokenExpire: number;
-    refreshTokenExpire: number;
-    profile?: {
-      id: string;
-      username: string;
-      name: string;
-      lastName: string;
-      email: string;
-    };
-  };
+// auth user data
+
+export type TUser = {
+  accessToken: string;
+  refreshToken: string;
+  accessTokenExpire: number;
+  refreshTokenExpire: number;
+  hashPassword: string;
+  profile?: TUserProfile;
 };
+
+export type TUserProfile = {
+  id: string;
+  username: string;
+  name: string;
+  lastName: string;
+  email: string;
+  image: string;
+};
+
+export type TAuthUserData = Omit<TUser, 'hashPassword'>;
+
+export type TDecodedAuthUser = {
+  user: TAuthUserData;
+} & TJwtUnionExpire;
+
+export type TJwtUnionExpire = {
+  iat: number;
+  exp: number;
+};
+
+export type TLoginResponse = {
+  token: string;
+  user: TAuthUserData;
+};
+
+export type TDecodedAuthUserResponse = {
+  user: Pick<TLoginResponse, 'user'>;
+};
+
+// use status hook
 
 export type TAuthStatus = 'loading' | 'authenticated' | 'unauthenticated';
-
-export type TAuthData = {
-  status: TAuthStatus;
-  isLoggedIn: boolean;
-  authUser: TAuthUserUnion;
-};
-
-export type TAuthUserUnion = TAuthUser | null;
-
-export type TAuthProvider = {
-  children: ReactNode;
-};
 
 export type TUseStatus = {
   authUser?: TAuthUserUnion;
@@ -38,6 +51,22 @@ export type TUseStatus = {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   status?: TAuthStatus;
   setStatus: React.Dispatch<React.SetStateAction<TAuthStatus>>;
+};
+
+//  use auth hook
+
+export type TAuthData = {
+  status: TAuthStatus;
+  isLoggedIn: boolean;
+  authUser: TAuthUserUnion;
+};
+
+export type TAuthUserUnion = TAuthUserData | null;
+
+// auth-provider
+
+export type TAuthProvider = {
+  children: ReactNode;
 };
 
 // Logout
@@ -62,16 +91,3 @@ export type TLoginInfoType =
   | 'fail'
   | 'initial'
   | 'loading';
-
-//Check Token
-
-export type TCheckTokenResponseData = {
-  data: {
-    decode: {
-      id: string;
-      exp: number;
-      iat: number;
-    };
-    token: string;
-  };
-};

@@ -18,7 +18,7 @@ export const useStatus = ({ setAuthUser, setIsLoggedIn, setStatus, status }: TUs
         if (check !== null) {
           //   token correct
           setStatus('authenticated');
-          setAuthUser({ token: check.data.token });
+          setAuthUser(check.user);
           setIsLoggedIn(true);
         } else {
           //   token not correct
