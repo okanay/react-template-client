@@ -44,7 +44,21 @@ export type TLoginInfoType =
   | 'e-mail-not-found'
   | 'password-not-found'
   | 'password-not-correct'
+  | 'credentials-not-correct'
   | 'e-mail-not-exist'
   | 'fail'
   | 'initial'
   | 'loading';
+
+//Check Token
+
+export type TCheckTokenResponseData = {
+  data: {
+    decode: {
+      id: string;
+      exp: number;
+      iat: number;
+    };
+    token: string;
+  };
+};

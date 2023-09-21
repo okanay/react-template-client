@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { TReduxState } from '~/redux/store.ts';
+import { TReduxState } from '../store.ts';
 
 export type TDummySlice = {
   isActive: boolean;

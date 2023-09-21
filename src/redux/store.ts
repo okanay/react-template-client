@@ -4,7 +4,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 
-import DummySliceReducer from '../redux/slices/dummyslice.ts';
+import DummySliceReducer from './slices/dummyslice.ts';
 
 const persistConfig = {
   key: 'root',

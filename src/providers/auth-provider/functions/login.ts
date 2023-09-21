@@ -11,28 +11,28 @@ export const Login = async (email: string, password: string) => {
   };
 
   if (email && password) {
-    const response = await axios.post(
-      '/api/login',
-      { email, password },
-      { headers: { 'Content-Type': 'application/json' } },
-    );
+    try {
+      const response = await axios.post(
+        '/api/login',
+        { email, password },
+        { headers: { 'Content-Type': 'application/json' } },
+      );
 
-    const data: TAuthUser | null = await response.data;
-    if (data?.token) {
-      loginInformation.info = 'success';
-      cookie.set('authenticated_token', data.token);
-      window.location.reload();
-    } else {
-      loginInformation.info = 'fail';
-    }
-  } else {
-    if (!email) {
-      loginInformation.info = 'e-mail-not-found';
-    } else if (!password) {
-      loginInformation.info = 'password-not-found';
-    } else {
+      if (response.status === 200) {
+        const data: TAuthUser | null = await response.data;
+
+        if (data?.token) {
+          loginInformation.info = 'success';
+          cookie.set('authenticated_token', data.token);
+          window.location.reload();
+        } else {
+          loginInformation.info = 'credentials-not-correct';
+        }
+      }
+    } catch (e) {
       loginInformation.info = 'fail';
     }
   }
+
   return loginInformation;
 };

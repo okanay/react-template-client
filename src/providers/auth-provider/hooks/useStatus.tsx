@@ -12,15 +12,16 @@ export const useStatus = ({ setAuthUser, setIsLoggedIn, setStatus, status }: TUs
     if (status === 'loading') {
       // check cookie
       if (authToken) {
-        //   check user cookie
+        // cookie exist
+        // check token
         const user = await CheckUserToken(String(authToken));
         if (user !== null) {
-          //   user exist
+          //   token correct
           setStatus('authenticated');
           setAuthUser(user);
           setIsLoggedIn(true);
         } else {
-          //   user not exist
+          //   token not correct
           setStatus('unauthenticated');
           setAuthUser(null);
           setIsLoggedIn(false);
@@ -37,7 +38,7 @@ export const useStatus = ({ setAuthUser, setIsLoggedIn, setStatus, status }: TUs
   };
 
   useEffect(() => {
-    checkStatus();
+    checkStatus().then(() => console.log('use status complete.'));
   }, [authToken]);
 
   return;
