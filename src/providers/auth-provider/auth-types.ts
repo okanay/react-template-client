@@ -2,6 +2,19 @@ import { ReactNode } from 'react';
 
 export type TAuthUser = {
   token: string;
+  data?: {
+    accessToken: string;
+    refreshToken: string;
+    accessTokenExpire: number;
+    refreshTokenExpire: number;
+    profile?: {
+      id: string;
+      username: string;
+      name: string;
+      lastName: string;
+      email: string;
+    };
+  };
 };
 
 export type TAuthStatus = 'loading' | 'authenticated' | 'unauthenticated';

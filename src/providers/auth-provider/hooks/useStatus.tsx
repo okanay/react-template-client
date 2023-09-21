@@ -14,11 +14,11 @@ export const useStatus = ({ setAuthUser, setIsLoggedIn, setStatus, status }: TUs
       if (authToken) {
         // cookie exist
         // check token
-        const user = await CheckUserToken(String(authToken));
-        if (user !== null) {
+        const check = await CheckUserToken(String(authToken));
+        if (check !== null) {
           //   token correct
           setStatus('authenticated');
-          setAuthUser(user);
+          setAuthUser({ token: check.data.token });
           setIsLoggedIn(true);
         } else {
           //   token not correct

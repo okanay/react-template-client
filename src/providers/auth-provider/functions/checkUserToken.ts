@@ -1,8 +1,8 @@
-import { TAuthUserUnion, TCheckTokenResponseData } from '~/providers/auth-provider/auth-types.ts';
+import { TCheckTokenResponseData } from '~/providers/auth-provider/auth-types.ts';
 import axios from 'axios';
 
 export const CheckUserToken = async (token: string) => {
-  let user: TAuthUserUnion = null;
+  let check: TCheckTokenResponseData | null = null;
 
   if (token) {
     try {
@@ -14,15 +14,15 @@ export const CheckUserToken = async (token: string) => {
       });
 
       if (response.status === 200) {
-        const check: TCheckTokenResponseData | null = await response.data;
+        check = (await response.data) as TCheckTokenResponseData;
         if (check?.data.token) {
-          return (user = { token: check.data.token });
+          return check;
         }
       }
     } catch (error) {
-      return (user = null);
+      return (check = null);
     }
   }
 
-  return user;
+  return check;
 };
