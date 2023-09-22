@@ -94,3 +94,6 @@ export type TLoginInfoType =
   | 'fail'
   | 'initial'
   | 'loading';
+
+export type TControlStatus = 'idle' | 'loading' | 'success' | 'error';
+export type TControlType = 'user' | 'admin';
